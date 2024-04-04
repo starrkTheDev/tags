@@ -6,6 +6,7 @@ const initialState = {
   currentPage: 1,
   totalPages: 1,
   sortBy: 'desc',
+  loading: false,
 };
 
 export const tagListSlice = createSlice({
@@ -27,10 +28,13 @@ export const tagListSlice = createSlice({
     toggleSortOrder: (state) => {
       state.sortBy = state.sortBy === 'desc' ? 'asc' : 'desc';
     },
+    setLoading(state, action) {
+      state.loading = action.payload;
+    },
   },
 });
 
-export const { setTags, setPerPage, setCurrentPage, setTotalPages, toggleSortOrder } = tagListSlice.actions;
+export const { setTags, setPerPage, setCurrentPage, setTotalPages, toggleSortOrder, setLoading } = tagListSlice.actions;
 
 export const fetchTags = () => async (dispatch, getState) => {
   const { perPage, currentPage, sortBy } = getState().tagList;
